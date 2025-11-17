@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Model;
+
+use DateTimeImmutable;
+
+/**
+ * Data Transfer Object (DTO) for a Product.
+ * Used to define the structure of the data loaded from the JSON file.
+ */
+class Product
+{
+    public function __construct(
+        public int $id,
+        public string $name,
+        public ?string $url,
+        public float $currentPrice,
+        public DateTimeImmutable $lastUpdated
+    ) {}
+}

@@ -15,6 +15,7 @@ class Product
         public string $name,
         public ?string $url,
         public float $currentPrice,
-        public DateTimeImmutable $lastUpdated
+        public DateTimeImmutable $lastUpdated,
+        public array $priceHistory = [] // Array of [price, timestamp]
     ) {}
 }

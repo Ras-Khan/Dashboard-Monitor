@@ -13,13 +13,34 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class DashboardController extends AbstractController
 {
+    public function __construct(private \App\Service\ProductPriceScraper $scraper) {}
     #[Route('/', name: 'app_dashboard')]
     public function index(JsonProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
 
+        $updatedProducts = [];
+        $now = new \DateTimeImmutable();
+        foreach ($products as $product) {
+            // Only scrape if last update is older than 1 hour
+            $interval = $now->getTimestamp() - $product->lastUpdated->getTimestamp();
+            if ($product->url && $interval > 3600) {
+                $scrapedPrice = $this->scraper->scrapePrice($product->url);
+                if ($scrapedPrice !== null) {
+                    $product->priceHistory[] = [
+                        'price' => $product->currentPrice,
+                        'timestamp' => $product->lastUpdated->format(\DateTimeImmutable::ATOM)
+                    ];
+                    $product->currentPrice = $scrapedPrice;
+                    $product->lastUpdated = $now;
+                    $productRepository->update($product);
+                }
+            }
+            $updatedProducts[] = $product;
+        }
+
         return $this->render('dashboard/index.html.twig', [
-            'products' => $products,
+            'products' => $updatedProducts,
         ]);
     }
 

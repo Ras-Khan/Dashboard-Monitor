@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Service;
 
 use App\Model\Product;
@@ -20,9 +19,24 @@ class JsonProductRepository
     }
 
     /**
-     * Reads the JSON file and returns an array of Product models.
-     * @return Product[]
+     * Updates an existing Product in the JSON file by ID.
      */
+    public function update(Product $product): void
+    {
+        $allData = $this->loadRawData();
+        foreach ($allData as &$item) {
+            if ($item['id'] === $product->id) {
+                $item['name'] = $product->name;
+                $item['url'] = $product->url;
+                $item['currentPrice'] = $product->currentPrice;
+                $item['lastUpdated'] = $product->lastUpdated->format(\DateTimeImmutable::ATOM);
+                $item['priceHistory'] = $product->priceHistory;
+            }
+        }
+        file_put_contents($this->dataFile, json_encode($allData, JSON_PRETTY_PRINT));
+    }
+
+// ...existing code...
     public function findAll(): array
     {
         if (!file_exists($this->dataFile)) {
@@ -43,7 +57,8 @@ class JsonProductRepository
                 name: $item['name'],
                 url: $item['url'],
                 currentPrice: (float) $item['currentPrice'],
-                lastUpdated: new \DateTimeImmutable($item['lastUpdated'])
+                lastUpdated: new \DateTimeImmutable($item['lastUpdated']),
+                priceHistory: $item['priceHistory'] ?? []
             );
         }
 
@@ -75,6 +90,7 @@ class JsonProductRepository
             'url' => $newProduct->url,
             'currentPrice' => $newProduct->currentPrice,
             'lastUpdated' => $newProduct->lastUpdated->format(\DateTimeImmutable::ATOM),
+            'priceHistory' => $newProduct->priceHistory,
         ];
 
         // 4. Add to the raw data array and write back to file

@@ -11,7 +11,7 @@ use DateTimeImmutable;
 class Product
 {
     public function __construct(
-        public int $id,
+        public ?int $id, // Now nullable for new products
         public string $name,
         public ?string $url,
         public float $currentPrice,

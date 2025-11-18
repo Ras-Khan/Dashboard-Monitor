@@ -7,7 +7,7 @@ use Symfony\Component\Filesystem\Path;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
- * Custom service to act as a data repository, reading from a JSON file.
+ * Custom service to act as a data repository, reading and writing to a JSON file.
  */
 class JsonProductRepository
 {
@@ -15,7 +15,6 @@ class JsonProductRepository
 
     public function __construct(ParameterBagInterface $parameterBag)
     {
-        // Use the kernel.project_dir parameter to reliably locate the JSON file
         $projectDir = $parameterBag->get('kernel.project_dir');
         $this->dataFile = Path::join($projectDir, 'src', 'Data', 'products.json');
     }
@@ -33,13 +32,11 @@ class JsonProductRepository
         try {
             $jsonContent = file_get_contents($this->dataFile);
             $data = json_decode($jsonContent, true);
-        } catch (\Throwable $e) {
-            // Handle JSON parsing or file read error gracefully
+        } catch (\Throwable) {
             return [];
         }
 
         $products = [];
-        // Map raw array data to the structured Product DTOs
         foreach ($data as $item) {
             $products[] = new Product(
                 id: $item['id'],
@@ -51,5 +48,50 @@ class JsonProductRepository
         }
 
         return $products;
+    }
+
+    /**
+     * Saves a new Product to the JSON file.
+     */
+    public function save(Product $newProduct): void
+    {
+        $products = $this->findAll();
+        $allData = $this->loadRawData();
+
+        // 1. Generate a new ID (simple max ID + 1 strategy)
+        $newId = 1;
+        if (!empty($products)) {
+            $newId = max(array_map(fn(Product $p) => $p->id, $products)) + 1;
+        }
+
+        // 2. Set the ID and update the timestamp
+        $newProduct->id = $newId;
+        $newProduct->lastUpdated = new \DateTimeImmutable();
+
+        // 3. Format the new product for JSON storage
+        $newProductData = [
+            'id' => $newProduct->id,
+            'name' => $newProduct->name,
+            'url' => $newProduct->url,
+            'currentPrice' => $newProduct->currentPrice,
+            'lastUpdated' => $newProduct->lastUpdated->format(\DateTimeImmutable::ATOM),
+        ];
+
+        // 4. Add to the raw data array and write back to file
+        $allData[] = $newProductData;
+        file_put_contents($this->dataFile, json_encode($allData, JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * Helper to load the raw array data for saving.
+     */
+    private function loadRawData(): array
+    {
+        if (!file_exists($this->dataFile)) {
+            return [];
+        }
+        $jsonContent = file_get_contents($this->dataFile);
+        $data = json_decode($jsonContent, true);
+        return is_array($data) ? $data : [];
     }
 }

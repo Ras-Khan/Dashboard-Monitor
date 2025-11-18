@@ -98,60 +98,67 @@
 {% block javascripts %}
         {{ parent() }}
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            function attachHistoryButtonHandlers() {
                 document.querySelectorAll('[data-history-toggle]').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var targetId = btn.getAttribute('data-history-toggle');
-                        var row = document.getElementById(targetId);
-                        if (row) {
-                            row.classList.toggle('hidden');
-                            // Draw chart only when shown
-                            if (!row.classList.contains('hidden')) {
-                                var canvas = row.querySelector('canvas');
-                                if (canvas && !canvas.dataset.chartDrawn) {
-                                    var prices = [];
-                                    var labels = [];
-                                    var table = row.querySelector('table');
-                                    if (table) {
-                                        table.querySelectorAll('tbody tr').forEach(function(tr) {
-                                            var tds = tr.querySelectorAll('td');
-                                            if (tds.length >= 2) {
-                                                var price = tds[0].textContent.replace(/[^\d.]/g, '');
-                                                var date = tds[1].textContent;
-                                                prices.push(parseFloat(price));
-                                                labels.push(date);
-                                            }
-                                        });
-                                    }
-                                    if (prices.length > 0) {
-                                        new Chart(canvas, {
-                                            type: 'line',
-                                            data: {
-                                                labels: labels,
-                                                datasets: [{
-                                                    label: 'Price',
-                                                    data: prices,
-                                                    borderColor: 'rgb(99, 102, 241)',
-                                                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                                                    fill: true,
-                                                    tension: 0.2
-                                                }]
-                                            },
-                                            options: {
-                                                scales: {
-                                                    x: { display: true, title: { display: true, text: 'Date' } },
-                                                    y: { display: true, title: { display: true, text: 'Price ($)' } }
+                    if (!btn._historyHandlerAttached) {
+                        btn.addEventListener('click', function() {
+                            var targetId = btn.getAttribute('data-history-toggle');
+                            var row = document.getElementById(targetId);
+                            if (row) {
+                                if (row.classList.contains('hidden')) {
+                                    row.classList.remove('hidden');
+                                } else {
+                                    row.classList.add('hidden');
+                                }
+                                if (!row.classList.contains('hidden')) {
+                                    var canvas = row.querySelector('canvas');
+                                    if (canvas && !canvas.dataset.chartDrawn) {
+                                        var prices = [];
+                                        var labels = [];
+                                        var table = row.querySelector('table');
+                                        if (table) {
+                                            table.querySelectorAll('tbody tr').forEach(function(tr) {
+                                                var tds = tr.querySelectorAll('td');
+                                                if (tds.length >= 2) {
+                                                    var price = tds[0].textContent.replace(/[^\d.]/g, '');
+                                                    var date = tds[1].textContent;
+                                                    prices.push(parseFloat(price));
+                                                    labels.push(date);
+                                                }
+                                            });
+                                        }
+                                        if (prices.length > 0) {
+                                            new Chart(canvas, {
+                                                type: 'line',
+                                                data: {
+                                                    labels: labels,
+                                                    datasets: [{
+                                                        label: 'Price',
+                                                        data: prices,
+                                                        borderColor: 'rgb(99, 102, 241)',
+                                                        backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                                                        fill: true,
+                                                        tension: 0.2
+                                                    }]
                                                 },
-                                                plugins: { legend: { display: false } }
-                                            }
-                                        });
-                                        canvas.dataset.chartDrawn = '1';
+                                                options: {
+                                                    scales: {
+                                                        x: { display: true, title: { display: true, text: 'Date' } },
+                                                        y: { display: true, title: { display: true, text: 'Price ($)' } }
+                                                    },
+                                                    plugins: { legend: { display: false } }
+                                                }
+                                            });
+                                            canvas.dataset.chartDrawn = '1';
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                        btn._historyHandlerAttached = true;
+                    }
                 });
-            });
+            }
+            document.addEventListener('DOMContentLoaded', attachHistoryButtonHandlers);
         </script>
 {% endblock %}

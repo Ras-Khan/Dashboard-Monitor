@@ -4,7 +4,7 @@
         "name": "Amzfast Monitor Curvo",
         "url": "https:\/\/www.amazon.nl\/Amzfast-Gaming-Monitor-Curvo-Blauwlichtfilter\/dp\/B0DYJZGFQS?__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=GI55UCOI389T&dib=eyJ2IjoiMSJ9.eQJA2UX7OapPxK91mOZ1eSvkqSiIBX99Xd-bujAm1RVzoQy6NwlLTq5UdeZygTSe689p987v66FKUqUYmfz6PuMaBdS712yvUG-Q03KAgYRVzH-xY8HXmgq3a0AY5dEty39GY72egiU61YqTzeSTF1i4A1JWEOlJ71k_qpxgCe0jmBSnL3pEJ_oJy3xCXxNcmuWQLkgOrxcyg2csmIxBeYi0ZWrzMOigEVLX85_gYs6rfLX4_YDIlrwXBbf2Vr57U5XgXic6rgha5nuhdeJPgN9XjW4H6I4FZxJ9rEePi_A.Dx2B7ErfAsbV0IngWmHtwxgvZs5SuKXIU2X6mify03U&dib_tag=se&keywords=monitor&qid=1763415666&sprefix=monito%252Caps%252C89&sr=8-5",
         "currentPrice": 99.99,
-        "lastUpdated": "2025-11-18T12:25:03+01:00",
+        "lastUpdated": "2025-11-18T14:24:51+01:00",
         "priceHistory": [
             {
                 "price": 99.99,
@@ -25,6 +25,10 @@
             {
                 "price": 99.99,
                 "timestamp": "2025-11-18T12:24:34+01:00"
+            },
+            {
+                "price": 99.99,
+                "timestamp": "2025-11-18T12:25:03+01:00"
             }
         ]
     },
@@ -33,7 +37,7 @@
         "name": "DIERYA DK61se Toetsenbord",
         "url": "https:\/\/www.amazon.nl\/Toetsenbord-Ultra-compacte-Anti-Ghosting-C-Datakabel-Amerikaanse\/dp\/B0B4W52FN5?__mk_nl_NL=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2PL6AJCEE3W8J&dib=eyJ2IjoiMSJ9.pgoCjY6triK9hcd8JoXAemih3tKAQ-jJXhByKOa4yyUMMIGYR11PfC-UvLosM_24Fl10Y38IF8tvK5YA0F-JjRhQAlH911MBhBezxJUS9J7ciWP8QqfoyrMEt4mgNtUTQ26gdnGgtGyJJLvHOofvtOieFzNnn1k0PE35V4q9DDmfWKOKUS4foMPEN4_GWeq7Lbb3JbUhO8WfSTUUJRD28uX1Qmgeygvm0Dj62O2IBR92YMNNRdUyYu9eSHtc53_FOFp4Td34lWboy5vHgXQ2DpDRRIDtSbXYcFdulspM8RY.NXs3hPEiZFsx_fklGWIbv-6ilVCE-9kvBCw0mXqShto&dib_tag=se&keywords=keyboard&qid=1763415691&sprefix=keyboard%2Caps%2C83&sr=8-5&th=1",
         "currentPrice": 29.99,
-        "lastUpdated": "2025-11-18T12:25:05+01:00",
+        "lastUpdated": "2025-11-18T14:24:51+01:00",
         "priceHistory": [
             {
                 "price": 29.99,
@@ -54,6 +58,10 @@
             {
                 "price": 29.99,
                 "timestamp": "2025-11-18T12:24:36+01:00"
+            },
+            {
+                "price": 29.99,
+                "timestamp": "2025-11-18T12:25:05+01:00"
             }
         ]
     },
@@ -91,7 +99,7 @@
         "name": "Soundcore van Anker Q20i-hoofdtelefoon",
         "url": "https:\/\/www.amazon.nl\/Q20i-hoofdtelefoon-ruisonderdrukking-bluetoothoordoppen-appinstellingen-transparantiemodus\/dp\/B0C3HCD34R\/?_encoding=UTF8&pd_rd_w=vAy8l&content-id=amzn1.sym.ea4031ec-2c5e-4429-b140-8bb712fe5be7&pf_rd_p=ea4031ec-2c5e-4429-b140-8bb712fe5be7&pf_rd_r=W8GBFR78FD0TJ1DCZ38G&pd_rd_wg=qWfmr&pd_rd_r=5713ca5e-d311-4926-a5fd-3baca00f7517&th=1",
         "currentPrice": 32.99,
-        "lastUpdated": "2025-11-18T12:25:08+01:00",
+        "lastUpdated": "2025-11-18T14:24:51+01:00",
         "priceHistory": [
             {
                 "price": 39.99,
@@ -112,6 +120,10 @@
             {
                 "price": 32.99,
                 "timestamp": "2025-11-18T12:24:39+01:00"
+            },
+            {
+                "price": 32.99,
+                "timestamp": "2025-11-18T12:25:08+01:00"
             }
         ]
     },
@@ -120,12 +132,24 @@
         "name": "Anker Powerline 1,8 m USB-C naar USB 3.0-kabel",
         "url": "https:\/\/www.amazon.nl\/Anker-Powerline-3-0-kabel-pull-upweerstand-apparaten\/dp\/B01E9W8KYC\/260-1640858-2930609?pd_rd_w=Kxbt0&content-id=amzn1.sym.f92ec3aa-9cca-4386-ad2e-e4ee1513855d&pf_rd_p=f92ec3aa-9cca-4386-ad2e-e4ee1513855d&pf_rd_r=Y4PEP58PRRMQCXEFTC66&pd_rd_wg=hInWB&pd_rd_r=40401d7b-df99-4398-bc4f-e1a6d0d97013&pd_rd_i=B01E9W8KYC&psc=1",
         "currentPrice": 11.04,
-        "lastUpdated": "2025-11-18T12:25:09+01:00",
+        "lastUpdated": "2025-11-18T14:24:51+01:00",
         "priceHistory": [
             {
                 "price": 12.99,
                 "timestamp": "2025-11-18T12:25:02+01:00"
+            },
+            {
+                "price": 11.04,
+                "timestamp": "2025-11-18T12:25:09+01:00"
             }
         ]
+    },
+    {
+        "id": 6,
+        "name": "test",
+        "url": "http:\/\/test",
+        "currentPrice": 0.1,
+        "lastUpdated": "2025-11-18T15:05:43+01:00",
+        "priceHistory": []
     }
 ]
